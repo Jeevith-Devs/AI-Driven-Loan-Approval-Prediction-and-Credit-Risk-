@@ -1,0 +1,55 @@
+The easiest way to run this online is:
+
+deploy the Next.js frontend on Vercel
+deploy the Python backend on Render
+I already prepared the repo for that:
+
+[render.yaml](C:\Users\Admin\Documents\New project\render.yaml)
+[backend/.python-version](C:\Users\Admin\Documents\New project\backend\.python-version)
+[backend/requirements.txt](C:\Users\Admin\Documents\New project\backend\requirements.txt)
+[frontend/.env.production.example](C:\Users\Admin\Documents\New project\frontend\.env.production.example)
+Recommended setup
+
+Push this project to GitHub.
+Deploy the backend on Render.
+Deploy the frontend on Vercel.
+Set the frontend env var to your backend URL.
+Add custom domains later if you want.
+Backend on Render
+
+Go to Render and import your GitHub repo.
+Use the repo root normally. Render will read [render.yaml](C:\Users\Admin\Documents\New project\render.yaml).
+It will create a Python web service from backend/.
+Your backend start command is already set to gunicorn app:app.
+After deploy, test:
+https://your-backend-url.onrender.com/health
+Important note:
+
+I pinned Python in [backend/.python-version](C:\Users\Admin\Documents\New project\backend\.python-version) to 3.11.11.
+Render’s docs currently show a newer default Python version, so pinning 3.11 is the safer choice for your current scikit-learn stack. That compatibility judgment is my inference based on your dependency versions.
+Frontend on Vercel
+
+Go to Vercel and import the same GitHub repo.
+Set Root Directory to frontend.
+Add this environment variable:
+NEXT_PUBLIC_API_BASE_URL=https://your-backend-url.onrender.com
+Deploy.
+Your site will get a Vercel URL like:
+https://your-project.vercel.app
+After deployment
+
+Frontend URL: https://your-project.vercel.app
+Backend health: https://your-backend-url.onrender.com/health
+Loan API: https://your-backend-url.onrender.com/api/loan-approval
+Credit risk API: https://your-backend-url.onrender.com/api/credit-risk
+Docs I checked
+
+Render Flask deploy: render.com/docs/deploy-flask
+Render language versions: render.com/docs/language-support
+Vercel Next.js deploy: vercel.com/docs/frameworks/nextjs
+Vercel monorepo/root directory: vercel.com/docs/deployments/configure-a-build#root-directory
+If you want, I can do the next step and create:
+
+a DEPLOYMENT.md
+a vercel.json if needed
+a one-click deploy checklist for Render + Vercel
