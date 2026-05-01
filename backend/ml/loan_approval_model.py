@@ -690,6 +690,10 @@ def predict_loan_approval(
 
     return {
         "decision": decision,
+        "approved": decision == "Approved",
+        "prediction": decision,
+        "probability": approval_probability_percent,
+        "confidence": approval_probability_percent,
         "approval_probability_percent": approval_probability_percent,
         "rejection_probability_percent": round((1 - approval_probability) * 100, 2),
         "bank_recommendation": explanation["bank_recommendation"],

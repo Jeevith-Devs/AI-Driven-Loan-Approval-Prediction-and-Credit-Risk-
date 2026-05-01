@@ -234,7 +234,7 @@ def api_loan_approval() -> Any:
         bundle = ensure_model_ready(LOAN_MODEL_BUNDLE, LOAN_MODEL_ERROR, "Loan approval")
         applicant_data, _ = collect_input_data(LOAN_FIELDS, payload)
         prediction = predict_loan_approval(applicant_data, model_bundle=bundle)
-        return jsonify({"input": applicant_data, "prediction": prediction})
+        return jsonify(prediction)
     except Exception as exc:
         return jsonify({"error": str(exc)}), 400
 
@@ -249,7 +249,7 @@ def api_credit_risk() -> Any:
         bundle = ensure_model_ready(CREDIT_MODEL_BUNDLE, CREDIT_MODEL_ERROR, "Credit risk")
         applicant_data, _ = collect_input_data(CREDIT_FIELDS, payload)
         prediction = predict_credit_risk(applicant_data, model_bundle=bundle)
-        return jsonify({"input": applicant_data, "prediction": prediction})
+        return jsonify(prediction)
     except Exception as exc:
         return jsonify({"error": str(exc)}), 400
 

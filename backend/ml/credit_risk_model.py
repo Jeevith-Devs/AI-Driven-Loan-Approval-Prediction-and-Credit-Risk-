@@ -585,11 +585,13 @@ def predict_credit_risk(
     explanation = build_risk_explanation(engineered_record, default_probability_percent)
 
     return {
-        "default_probability_percent": default_probability_percent,
+        "probability_of_default": default_probability_percent,
+        "pd": default_probability_percent,
         "creditworthiness_percent": round((1 - high_risk_probability) * 100, 2),
         "risk_band": explanation["risk_band"],
         "bank_recommendation": explanation["bank_recommendation"],
-        "summary": explanation["summary"],
+        "explanation": explanation["summary"],
+        "reason_codes": explanation["concerns"],
         "strengths": explanation["strengths"],
         "concerns": explanation["concerns"],
         "key_metrics": explanation["key_metrics"],
